@@ -12,6 +12,8 @@ class Post
 
     public string $content;
 
+    public string $slug;
+
     /**
      * @return string
      */
@@ -26,6 +28,14 @@ class Post
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function getExcerpt(): string

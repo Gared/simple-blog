@@ -21,7 +21,7 @@ class PostRepository
      */
     public function findAll(): array
     {
-        $stmt = $this->pdo->query('SELECT title, content FROM post');
+        $stmt = $this->pdo->query('SELECT id, slug, title, content FROM post ORDER BY created_at DESC');
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, Post::class);
     }
