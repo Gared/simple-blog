@@ -10,6 +10,9 @@
         <title>Stefan Blog - <?= $pageName ?></title>
     </head>
     <body>
+        <div class="menu">
+            <a href="/login">[Login]</a>
+        </div>
         <div class="main">
             <h1><?= $pageName ?></h1>
             <?= $content ?>
