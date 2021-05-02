@@ -50,4 +50,10 @@ class PostRepository
 
         return $post;
     }
+
+    public function save(Post $post): void
+    {
+        $prepareStatement = $this->pdo->prepare('INSERT INTO post (title, content, slug, user_id) VALUES (?, ?, ?, ?)');
+        $prepareStatement->execute([$post->title, $post->content, $post->slug, $post->user_id]);
+    }
 }

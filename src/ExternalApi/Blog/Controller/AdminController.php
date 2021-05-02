@@ -19,6 +19,10 @@ class AdminController implements SimpleControllerInterface
         $posts = $postsQueryHandler->execute();
 
         $pageName = 'Admin area';
+        ob_start();
+        include(__DIR__ . '/../View/admin_posts.php');
+        $content = ob_get_contents();
+        ob_end_clean();
 
         ob_start();
         include(__DIR__ . '/../View/admin.php');

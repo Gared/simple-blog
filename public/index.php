@@ -15,4 +15,6 @@ $router->addController('#^/login$#', 'GET', \StefanBlog\ExternalApi\Blog\Control
 $router->addController('#^/login$#', 'POST', \StefanBlog\ExternalApi\Blog\Controller\LoginController::class);
 $router->addController('#^/logout$#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\LogoutController::class);
 $router->addController('#^/admin$#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\AdminController::class);
+$router->addController('#^/admin/post/create$#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\CreatePostFormController::class);
+$router->addController('#^/admin/post/create$#', 'POST', \StefanBlog\ExternalApi\Blog\Controller\CreatePostController::class);
 $router->doRouting();
