@@ -9,6 +9,6 @@ use StefanBlog\Infrastructure\Routing\SimpleRouter;
 // do routing
 var_dump($_SERVER);
 
-$router = new SimpleRouter($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+$router = new SimpleRouter($_SERVER);
 $router->addController('#/?#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\PostOverviewController::class);
 $router->doRouting();

@@ -6,6 +6,7 @@ namespace StefanBlogTest\Infrastructure\Routing;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
+use StefanBlog\ExternalApi\Blog\Controller\PostOverviewController;
 use StefanBlog\Infrastructure\Routing\SimpleRouter;
 
 class SimpleRouterTest extends TestCase
@@ -14,14 +15,26 @@ class SimpleRouterTest extends TestCase
     {
         self::expectException(Exception::class);
 
-        $router = new SimpleRouter('/', 'GET');
+        $request = [
+            'REQUEST_URI' => '/',
+            'REQUEST_METHOD' => 'GET',
+        ];
+
+        $router = new SimpleRouter($request);
         $router->doRouting();
     }
 
     public function testRouting(): void
     {
-        $router = new SimpleRouter('/', 'GET');
-        $router->addController('#/?#', 'GET', 'stdclass');
+        $request = [
+            'REQUEST_URI' => '',
+            'REQUEST_METHOD' => 'GET',
+        ];
+
+        $controllerMock = $this->createMock(PostOverviewController::class);
+
+        $router = new SimpleRouter($request);
+        $router->addController('#/?#', 'GET', get_class($controllerMock));
         self::assertTrue($router->doRouting());
     }
 }

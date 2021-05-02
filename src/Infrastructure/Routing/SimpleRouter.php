@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace StefanBlog\Infrastructure\Routing;
 
+use StefanBlog\Infrastructure\Controller\SimpleControllerInterface;
+
 class SimpleRouter
 {
     private const METHOD_GET = 'GET';
@@ -11,14 +13,15 @@ class SimpleRouter
 
     private string $requestUri;
     private string $method;
+    private array $request;
     private array $controllers = [];
 
     public function __construct(
-        string $requestUri,
-        string $method
+        array $request
     ) {
-        $this->requestUri = $requestUri;
-        $this->method = $method;
+        $this->request = $request;
+        $this->requestUri = $request['REQUEST_URI'];
+        $this->method = $request['REQUEST_METHOD'];
     }
 
     public function addController(
@@ -35,8 +38,10 @@ class SimpleRouter
             if ($method === $this->method) {
                 foreach ($urls as $url => $controllerClass) {
                     if (preg_match($url, $this->requestUri)) {
+                        /** @var SimpleControllerInterface $controller */
                         $controller = new $controllerClass;
-                        var_dump($controller);
+                        $text = $controller->process($this->request);
+                        echo $text;
                         return true;
                     }
                 }
