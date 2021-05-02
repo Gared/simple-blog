@@ -22,14 +22,14 @@ class SimpleRouter
     }
 
     public function addController(
-        string $requestUri,
+        string $requestUriRegex,
         string $method,
         string $controllerClass
     ): void {
-        $this->controllers[$method][$requestUri] = $controllerClass;
+        $this->controllers[$method][$requestUriRegex] = $controllerClass;
     }
 
-    public function doRouting(): void
+    public function doRouting(): bool
     {
         foreach ($this->controllers as $method => $urls) {
             if ($method === $this->method) {
@@ -37,6 +37,7 @@ class SimpleRouter
                     if (preg_match($url, $this->requestUri)) {
                         $controller = new $controllerClass;
                         var_dump($controller);
+                        return true;
                     }
                 }
             }
