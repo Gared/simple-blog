@@ -39,15 +39,6 @@ class PostRepository
             return null;
         }
 
-        $prepareStatement = $this->pdo->prepare('SELECT id, name FROM user WHERE id=:id');
-        $prepareStatement->bindParam(':id', $post->user_id);
-        $prepareStatement->execute();
-        $prepareStatement->setFetchMode(PDO::FETCH_CLASS, User::class);
-
-        $user = $prepareStatement->fetch();
-
-        $post->user = $user;
-
         return $post;
     }
 
