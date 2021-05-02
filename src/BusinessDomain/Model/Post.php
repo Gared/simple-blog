@@ -33,4 +33,13 @@ class Post
     {
         return $this->content;
     }
+
+    public function getExcerpt(): string
+    {
+        if (strlen($this->content) > 100) {
+            return substr($this->content, 0, 97) . '...';
+        }
+
+        return $this->content;
+    }
 }

@@ -14,6 +14,11 @@ class PostOverviewController implements SimpleControllerInterface
         $postsQueryHandler = new LoadPostsQueryHandler();
         $posts = $postsQueryHandler->execute();
 
-        return 'test';
+        $pageName = 'Posts overview';
+        ob_start();
+        include(__DIR__ . '/../View/main.php');
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 }
