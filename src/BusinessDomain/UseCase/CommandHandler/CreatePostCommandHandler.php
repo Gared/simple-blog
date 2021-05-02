@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanBlog\BusinessDomain\UseCase\CommandHandler;
 
-use StefanBlog\BusinessDomain\Model\Post;
+use StefanBlog\DataDomain\Entity\PostEntity;
 use StefanBlog\BusinessDomain\Repository\PostRepository;
 use StefanBlog\BusinessDomain\UseCase\Command\CreatePostCommand;
 
@@ -19,7 +19,7 @@ class CreatePostCommandHandler
 
     public function execute(CreatePostCommand $command)
     {
-        $post = new Post();
+        $post = new PostEntity();
         $post->title = $command->getTitle();
         $post->content = $command->getContent();
         $post->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $command->getTitle())));

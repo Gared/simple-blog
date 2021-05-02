@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace StefanBlog\BusinessDomain\Model;
+namespace StefanBlog\DataDomain\Entity;
 
-class User
+class UserEntity
 {
     public int $id;
 

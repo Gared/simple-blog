@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace StefanBlog\BusinessDomain\Model;
+namespace StefanBlog\DataDomain\Entity;
 
-class Post
+class PostEntity
 {
     public int $id;
 
@@ -14,7 +14,7 @@ class Post
 
     public string $slug;
 
-    public User $user;
+    public UserEntity $user;
 
     public int $user_id;
 
@@ -51,7 +51,7 @@ class Post
         return $this->content;
     }
 
-    public function getUser(): User
+    public function getUser(): UserEntity
     {
         return $this->user;
     }

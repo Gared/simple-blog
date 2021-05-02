@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanBlog\BusinessDomain\UseCase\CommandHandler;
 
-use StefanBlog\BusinessDomain\Model\User;
+use StefanBlog\DataDomain\Entity\UserEntity;
 use StefanBlog\BusinessDomain\Repository\UserRepository;
 use StefanBlog\BusinessDomain\UseCase\Command\CreateUserCommand;
 
@@ -19,7 +19,7 @@ class CreateUserCommandHandler
 
     public function execute(CreateUserCommand $command)
     {
-        $user = new User();
+        $user = new UserEntity();
         $user->name = $command->getUsername();
         $user->login = $command->getLogin();
         $user->password = password_hash($command->getPassword(), PASSWORD_BCRYPT);

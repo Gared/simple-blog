@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace StefanBlog\BusinessDomain\UseCase\QueryHandler;
 
 use PDO;
-use StefanBlog\BusinessDomain\Model\Post;
+use StefanBlog\DataDomain\Entity\PostEntity;
 use StefanBlog\BusinessDomain\Repository\PostRepository;
 
 class LoadPostsQueryHandler
@@ -33,7 +33,7 @@ class LoadPostsQueryHandler
         return $postRepository->findAll();
 
         return [
-            new Post('Hello world', 'This is the first post'),
+            new PostEntity('Hello world', 'This is the first post'),
         ];
     }
 }

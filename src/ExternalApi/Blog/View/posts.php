@@ -1,6 +1,6 @@
 <?php
 /**
- * @var StefanBlog\BusinessDomain\Model\Post[] $posts
+ * @var StefanBlog\DataDomain\Entity\PostEntity[] $posts
  */
 ?>
 

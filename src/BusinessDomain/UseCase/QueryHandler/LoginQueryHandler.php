@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace StefanBlog\BusinessDomain\UseCase\QueryHandler;
 
-use StefanBlog\BusinessDomain\Model\User;
+use StefanBlog\DataDomain\Entity\UserEntity;
 use StefanBlog\BusinessDomain\Repository\UserRepository;
 use StefanBlog\BusinessDomain\UseCase\Query\LoginQuery;
 use StefanBlog\Infrastructure\Database\DatabasePdoFactory;
 
 class LoginQueryHandler
 {
-    public function execute(LoginQuery $query): ?User
+    public function execute(LoginQuery $query): ?UserEntity
     {
         $userRepository = new UserRepository(
             DatabasePdoFactory::create()
