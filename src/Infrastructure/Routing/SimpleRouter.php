@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace StefanBlog\Infrastructure\Routing;
 
 use StefanBlog\Infrastructure\Controller\SimpleControllerInterface;
+use StefanBlog\Infrastructure\Exception\RedirectException;
 
 class SimpleRouter
 {
-    private const METHOD_GET = 'GET';
-    private const METHOD_POST = 'POST';
-
     private string $requestUri;
     private string $method;
     private array $serverData;
@@ -46,8 +44,12 @@ class SimpleRouter
                         $requestData = array_merge($this->serverData, [
                             'REQUEST_DATA' => $this->request
                         ]);
-                        $text = $controller->process($requestData, $matches);
-                        echo $text;
+                        try {
+                            $text = $controller->process($requestData, $matches);
+                            echo $text;
+                        } catch (RedirectException $exception) {
+                            echo '<meta http-equiv="refresh" content="0; url=' . $exception->getRedirectRoute() . '" />';
+                        }
                         return true;
                     }
                 }
