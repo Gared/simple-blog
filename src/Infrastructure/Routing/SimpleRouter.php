@@ -11,6 +11,7 @@ class SimpleRouter
 
     private string $requestUri;
     private string $method;
+    private array $controllers = [];
 
     public function __construct(
         string $requestUri,
@@ -20,16 +21,27 @@ class SimpleRouter
         $this->method = $method;
     }
 
-    public function doRouting()
+    public function addController(
+        string $requestUri,
+        string $method,
+        string $controllerClass
+    ): void {
+        $this->controllers[$method][$requestUri] = $controllerClass;
+    }
+
+    public function doRouting(): void
     {
-        var_dump($this->requestUri);
-        switch ($this->requestUri) {
-            case '/':
-            case '':
-                if ($this->method === self::METHOD_GET) {
-                    var_dump('render blog');
+        foreach ($this->controllers as $method => $urls) {
+            if ($method === $this->method) {
+                foreach ($urls as $url => $controllerClass) {
+                    if (preg_match($url, $this->requestUri)) {
+                        $controller = new $controllerClass;
+                        var_dump($controller);
+                    }
                 }
-                break;
+            }
         }
+
+        throw new \Exception('no controller can handle this request');
     }
 }
