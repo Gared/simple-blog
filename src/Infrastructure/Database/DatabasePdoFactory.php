@@ -6,7 +6,7 @@ namespace StefanBlog\Infrastructure\Database;
 
 use PDO;
 
-class DatabaseFactory
+class DatabasePdoFactory
 {
     public static function create(): PDO
     {
