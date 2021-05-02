@@ -13,15 +13,18 @@ class SimpleRouter
 
     private string $requestUri;
     private string $method;
-    private array $request;
+    private array $serverData;
     private array $controllers = [];
+    private array $request;
 
     public function __construct(
+        array $serverData,
         array $request
     ) {
+        $this->serverData = $serverData;
+        $this->requestUri = $serverData['REQUEST_URI'];
+        $this->method = $serverData['REQUEST_METHOD'];
         $this->request = $request;
-        $this->requestUri = $request['REQUEST_URI'];
-        $this->method = $request['REQUEST_METHOD'];
     }
 
     public function addController(
@@ -40,7 +43,10 @@ class SimpleRouter
                     if (preg_match($url, $this->requestUri, $matches)) {
                         /** @var SimpleControllerInterface $controller */
                         $controller = new $controllerClass;
-                        $text = $controller->process($this->request, $matches);
+                        $requestData = array_merge($this->serverData, [
+                            'REQUEST_DATA' => $this->request
+                        ]);
+                        $text = $controller->process($requestData, $matches);
                         echo $text;
                         return true;
                     }
