@@ -1,0 +1,17 @@
+{
+  "name": "gared/simple-blog",
+  "description": "Simple blog",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Stefan Müller",
+      "email": "stefan@stefans-entwicklerecke.de"
+    }
+  ],
+  "require": {
+  },
+  "scripts": {
+    "serve": "php -S localhost:8000 -t public"
+  }
+}
