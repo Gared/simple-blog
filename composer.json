@@ -9,6 +9,11 @@
       "email": "stefan@stefans-entwicklerecke.de"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "StefanBlog\\": "src/"
+    }
+  },
   "require": {
     "php": ">=7.4"
   },
