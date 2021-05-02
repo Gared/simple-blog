@@ -6,7 +6,6 @@ namespace StefanBlog\BusinessDomain\Repository;
 
 use PDO;
 use StefanBlog\DataDomain\Entity\PostEntity;
-use StefanBlog\DataDomain\Entity\UserEntity;
 
 class PostRepository
 {
