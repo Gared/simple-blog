@@ -9,7 +9,7 @@ use StefanBlog\Infrastructure\Controller\SimpleControllerInterface;
 
 class PostOverviewController implements SimpleControllerInterface
 {
-    public function process(array $request): string
+    public function process(array $request, array $routeMatches): string
     {
         $postsQueryHandler = new LoadPostsQueryHandler();
         $posts = $postsQueryHandler->execute();
