@@ -20,7 +20,7 @@ class SimpleRouterTest extends TestCase
             'REQUEST_METHOD' => 'GET',
         ];
 
-        $router = new SimpleRouter($request);
+        $router = new SimpleRouter($request, []);
         $router->doRouting();
     }
 
@@ -33,7 +33,7 @@ class SimpleRouterTest extends TestCase
 
         $controllerMock = $this->createMock(PostOverviewController::class);
 
-        $router = new SimpleRouter($request);
+        $router = new SimpleRouter($request, []);
         $router->addController('#/?#', 'GET', get_class($controllerMock));
         self::assertTrue($router->doRouting());
     }
