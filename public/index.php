@@ -14,4 +14,5 @@ $router->addController('#^/post/([A-Za-z0-9-]+)$#', 'GET', \StefanBlog\ExternalA
 $router->addController('#^/login$#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\ShowLoginController::class);
 $router->addController('#^/login$#', 'POST', \StefanBlog\ExternalApi\Blog\Controller\LoginController::class);
 $router->addController('#^/logout$#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\LogoutController::class);
+$router->addController('#^/admin$#', 'GET', \StefanBlog\ExternalApi\Blog\Controller\AdminController::class);
 $router->doRouting();
