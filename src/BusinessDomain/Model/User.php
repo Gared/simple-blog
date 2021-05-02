@@ -10,6 +10,10 @@ class User
 
     public string $name;
 
+    public string $login;
+
+    public string $password;
+
     public function getName(): string
     {
         return $this->name;
