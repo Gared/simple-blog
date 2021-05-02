@@ -4,20 +4,23 @@ declare(strict_types=1);
 
 namespace StefanBlog\ExternalApi\Blog\Controller;
 
-use StefanBlog\BusinessDomain\UseCase\QueryHandler\LoadPostsQueryHandler;
+use StefanBlog\BusinessDomain\UseCase\QueryHandler\LoadPostQueryHandler;
 use StefanBlog\Infrastructure\Controller\SimpleControllerInterface;
 
-class PostOverviewController implements SimpleControllerInterface
+class PostController implements SimpleControllerInterface
 {
     public function process(array $request): string
     {
-        $postsQueryHandler = new LoadPostsQueryHandler();
-        $posts = $postsQueryHandler->execute();
+        $postsQueryHandler = new LoadPostQueryHandler();
+        $post = $postsQueryHandler->execute();
 
-        $pageName = 'Posts overview';
+        if ($post === null) {
+            throw new \Exception('not found');
+        }
 
+        $pageName = 'Post ' . $post->getTitle();
         ob_start();
-        include(__DIR__ . '/../View/posts.php');
+        include(__DIR__ . '/../View/post.php');
         $content = ob_get_contents();
         ob_end_clean();
 

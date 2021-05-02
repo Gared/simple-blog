@@ -25,4 +25,15 @@ class PostRepository
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, Post::class);
     }
+
+    public function find(int $id): ?Post
+    {
+        $prepareStatement = $this->pdo->prepare('SELECT id, slug, title, content FROM post WHERE id=:id ORDER BY created_at DESC');
+        $prepareStatement->bindParam(':id', $id);
+        $prepareStatement->execute();
+
+        $result = $prepareStatement->fetchAll(PDO::FETCH_CLASS, Post::class);
+
+        return $result[0] ?? null;
+    }
 }

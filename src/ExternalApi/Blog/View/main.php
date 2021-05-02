@@ -1,7 +1,7 @@
 <?php
 /**
- * @var StefanBlog\BusinessDomain\Model\Post[] $posts
  * @var string $pageName
+ * @var string $content
  */
 ?>
 
@@ -12,12 +12,7 @@
     <body>
         <div class="main">
             <h1><?= $pageName ?></h1>
-            <?php foreach ($posts as $post): ?>
-                <article>
-                    <h2><a href="/post/<?= $post->getSlug(); ?>"><?= $post->getTitle(); ?></a></h2>
-                    <p><?= $post->getExcerpt(); ?></p>
-                </article>
-            <?php endforeach; ?>
+            <?= $content ?>
         </div>
     </body>
 </html>
