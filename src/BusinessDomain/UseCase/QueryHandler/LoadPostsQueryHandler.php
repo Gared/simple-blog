@@ -19,10 +19,15 @@ class LoadPostsQueryHandler
 
     public function execute(): array
     {
-        $postRepository = new PostRepository(new PDO(
-            $this->config['mysql']['dsn'],
-            $this->config['mysql']['user'],
-            $this->config['mysql']['password'])
+        $postRepository = new PostRepository(
+            new PDO(
+                $this->config['mysql']['dsn'],
+                $this->config['mysql']['user'],
+                $this->config['mysql']['password'],
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                ]
+            )
         );
 
         return $postRepository->findAll();

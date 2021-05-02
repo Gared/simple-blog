@@ -14,6 +14,8 @@ class Post
 
     public string $slug;
 
+    public User $user;
+
     /**
      * @return string
      */
@@ -45,5 +47,10 @@ class Post
         }
 
         return $this->content;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }

@@ -6,6 +6,7 @@ namespace StefanBlog\BusinessDomain\Repository;
 
 use PDO;
 use StefanBlog\BusinessDomain\Model\Post;
+use StefanBlog\BusinessDomain\Model\User;
 
 class PostRepository
 {
@@ -21,19 +22,32 @@ class PostRepository
      */
     public function findAll(): array
     {
-        $stmt = $this->pdo->query('SELECT id, slug, title, content FROM post ORDER BY created_at DESC');
+        $stmt = $this->pdo->query('SELECT id, slug, title, content FROM post ORDER BY post.created_at DESC');
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, Post::class);
     }
 
     public function find(int $id): ?Post
     {
-        $prepareStatement = $this->pdo->prepare('SELECT id, slug, title, content FROM post WHERE id=:id ORDER BY created_at DESC');
+        $prepareStatement = $this->pdo->prepare('SELECT id, slug, title, content FROM post WHERE id=:id');
         $prepareStatement->bindParam(':id', $id);
         $prepareStatement->execute();
+        $prepareStatement->setFetchMode(PDO::FETCH_CLASS, Post::class);
 
-        $result = $prepareStatement->fetchAll(PDO::FETCH_CLASS, Post::class);
+        $post = $prepareStatement->fetch();
+        if ($post === null) {
+            return null;
+        }
 
-        return $result[0] ?? null;
+        $prepareStatement = $this->pdo->prepare('SELECT id, name FROM user WHERE id=:id');
+        $prepareStatement->bindParam(':id', $id);
+        $prepareStatement->execute();
+        $prepareStatement->setFetchMode(PDO::FETCH_CLASS, User::class);
+
+        $user = $prepareStatement->fetch();
+
+        $post->user = $user;
+
+        return $post;
     }
 }
