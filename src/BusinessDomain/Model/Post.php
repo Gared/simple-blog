@@ -16,6 +16,8 @@ class Post
 
     public User $user;
 
+    public int $user_id;
+
     /**
      * @return string
      */

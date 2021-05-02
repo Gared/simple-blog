@@ -37,10 +37,10 @@ class SimpleRouter
         foreach ($this->controllers as $method => $urls) {
             if ($method === $this->method) {
                 foreach ($urls as $url => $controllerClass) {
-                    if (preg_match($url, $this->requestUri)) {
+                    if (preg_match($url, $this->requestUri, $matches)) {
                         /** @var SimpleControllerInterface $controller */
                         $controller = new $controllerClass;
-                        $text = $controller->process($this->request);
+                        $text = $controller->process($this->request, $matches);
                         echo $text;
                         return true;
                     }

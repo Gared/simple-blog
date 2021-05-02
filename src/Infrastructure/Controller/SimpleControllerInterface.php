@@ -6,5 +6,5 @@ namespace StefanBlog\Infrastructure\Controller;
 
 interface SimpleControllerInterface
 {
-    public function process(array $request): string;
+    public function process(array $request, array $routeMatches): string;
 }

@@ -27,10 +27,10 @@ class PostRepository
         return $stmt->fetchAll(PDO::FETCH_CLASS, Post::class);
     }
 
-    public function find(int $id): ?Post
+    public function find(string $slug): ?Post
     {
-        $prepareStatement = $this->pdo->prepare('SELECT id, slug, title, content FROM post WHERE id=:id');
-        $prepareStatement->bindParam(':id', $id);
+        $prepareStatement = $this->pdo->prepare('SELECT id, slug, title, content, user_id FROM post WHERE slug=:slug');
+        $prepareStatement->bindParam(':slug', $slug);
         $prepareStatement->execute();
         $prepareStatement->setFetchMode(PDO::FETCH_CLASS, Post::class);
 
@@ -40,7 +40,7 @@ class PostRepository
         }
 
         $prepareStatement = $this->pdo->prepare('SELECT id, name FROM user WHERE id=:id');
-        $prepareStatement->bindParam(':id', $id);
+        $prepareStatement->bindParam(':id', $post->user_id);
         $prepareStatement->execute();
         $prepareStatement->setFetchMode(PDO::FETCH_CLASS, User::class);
 
