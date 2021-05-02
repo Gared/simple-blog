@@ -6,17 +6,11 @@ namespace StefanBlog\BusinessDomain\Model;
 
 class Post
 {
-    private string $title;
+    public int $id;
 
-    private string $content;
+    public string $title;
 
-    public function __construct(
-        string $title,
-        string $content
-    ) {
-        $this->title = $title;
-        $this->content = $content;
-    }
+    public string $content;
 
     /**
      * @return string
